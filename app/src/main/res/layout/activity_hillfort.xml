@@ -38,11 +38,24 @@
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/hillfortTitle"
+                    android:id="@+id/hillfortTownland"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:hint="@string/hint_hillfortTitle"
+                    android:hint="@string/hint_hillfortTownland"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp"/>
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/hillfortCounty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_hillfortCounty"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
