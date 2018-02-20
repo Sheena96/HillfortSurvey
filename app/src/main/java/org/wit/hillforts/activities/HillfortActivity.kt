@@ -22,29 +22,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         btnAdd.setOnClickListener() {
            hillfort.townland = hillfortTownland.text.toString()
-            hillfort.county = hillfortCounty.text.toString()
-
+            hillfort.county = county.text.toString()
             if (hillfort.townland.isNotEmpty()) {
-                //info("add Button Pressed: $hillfortTownland")
                 app.hillforts.add(hillfort.copy())
                 info("add Button Pressed: $hillfortTownland")
                 app.hillforts.forEach { info("add Button Pressed: ${it}")}
+                setResult(AppCompatActivity.RESULT_OK)
+                finish()
             }
             else {
                 toast ("Please Enter a Townland")
             }
 
-            if (hillfort.county.isNotEmpty()) {
-                //info("add Button Pressed: $hillfortCounty")
-                app.hillforts.add(hillfort.copy())
-                info("add Button Pressed: $hillfortCounty")
-                app.hillforts.forEach { info("add Button Pressed: ${it}")}
-            }
-            else {
-                toast ("Please Enter a County")
-            }
         }
-
 
     }
 }
