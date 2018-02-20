@@ -4,4 +4,5 @@
     <string name="county">County</string>
     <string name="button_addHillfort">Add Hillfort</string>
     <string name="menu_addHillfort">Add</string>
+    <string name="menu_cancelHillfort">Cancel</string>
 </resources>
