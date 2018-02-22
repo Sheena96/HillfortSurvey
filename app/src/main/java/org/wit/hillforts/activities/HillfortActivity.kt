@@ -25,12 +25,20 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
+        if (intent.hasExtra("hillfort_edit")) {
+            hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+            hillfortTownland.setText(hillfort.townland)
+            county.setText(hillfort.county)
+        }
+
         /*if (intent.hasExtra("hillfort_edit")) {
             edit = true;
             btnAdd.setText(R.string.save_hillfort)
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
             hillfortTownland.setText(hillfort.townland)
-            county.setText(hillfort.county)*/
+            county.setText(hillfort.county)
+            }*/
+
 
         btnAdd.setOnClickListener() {
            hillfort.townland= hillfortTownland.text.toString()
