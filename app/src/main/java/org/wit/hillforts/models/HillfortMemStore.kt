@@ -27,6 +27,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
         if (foundHillfort != null) {
             foundHillfort.townland = hillfort.townland
             foundHillfort.county = hillfort.county
+            foundHillfort.image = hillfort.image
         }
     }
 

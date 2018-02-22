@@ -5,4 +5,9 @@
     <string name="button_addHillfort">Add Hillfort</string>
     <string name="menu_addHillfort">Add</string>
     <string name="menu_cancelHillfort">Cancel</string>
+    <string name="save_hillfort"> Save Hillfort </string>
+    <string name="enter_hillfort_townland"> Please enter a Hillfort Townland </string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_hillfort_image">Select Hillfort image</string>
+    <string name="change_hillfort_image">Change Hillfort image</string>
 </resources>

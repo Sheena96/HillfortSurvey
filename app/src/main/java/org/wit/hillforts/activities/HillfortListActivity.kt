@@ -1,5 +1,6 @@
 package org.wit.hillforts.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -25,7 +26,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(),this)
+        recyclerView.adapter = HillfortAdapter(app.hillfortStore.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -33,15 +34,20 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        recyclerView.adapter.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<HillfortActivity>(AppCompatActivity.RESULT_OK)
+            R.id.item_add -> startActivityForResult<HillfortActivity>(200)
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
-        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), AppCompatActivity.RESULT_OK)
+        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 201)
     }
 }
 
