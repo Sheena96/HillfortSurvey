@@ -7,7 +7,7 @@ import org.wit.hillforts.models.HillfortMemStore
 import org.wit.hillforts.models.HillfortModel
 
 class MainApp : Application(), AnkoLogger {
-    
+
     val hillforts = HillfortMemStore()
 
     override fun onCreate() {

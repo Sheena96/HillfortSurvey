@@ -18,21 +18,26 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        toolbarAdd.title = title
-        setSupportActionBar(toolbarAdd)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
         app = application as MainApp
 
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
+
+        /*if (intent.hasExtra("hillfort_edit")) {
+            edit = true;
+            btnAdd.setText(R.string.save_hillfort)
+            hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+            hillfortTownland.setText(hillfort.townland)
+            county.setText(hillfort.county)*/
+
         btnAdd.setOnClickListener() {
-           hillfort.townland = hillfortTownland.text.toString()
+           hillfort.townland= hillfortTownland.text.toString()
             hillfort.county = county.text.toString()
+
             if (hillfort.townland.isNotEmpty()) {
                 app.hillforts.create(hillfort.copy())
-                //info("add Button Pressed: $hillfortTownland")
-                //app.hillforts.findAll().forEach() { info("add Button Pressed: ${it}")}
                 app.hillforts.findAll().forEach{ info("add Button Pressed: ${it}") }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
