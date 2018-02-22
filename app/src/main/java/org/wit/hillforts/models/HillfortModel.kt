@@ -5,5 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class HillfortModel(var townland: String = "",
+data class HillfortModel((var id: Long = 0,
+                         var townland: String = "",
                          var county: String = "") : Parcelable
