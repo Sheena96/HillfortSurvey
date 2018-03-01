@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.card_hillfort.view.*
+import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillforts.models.HillfortModel
 import org.wit.hillfortsurvey.R
 
@@ -31,6 +32,7 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
         fun bind(hillfort: HillfortModel, listener: HillfortListener) {
             itemView.HTownland.text = hillfort.townland
             itemView.HCounty.text = hillfort.county
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
         }
     }

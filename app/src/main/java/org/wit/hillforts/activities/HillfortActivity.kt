@@ -53,12 +53,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.county = county.text.toString()
 
             if (edit) {
-                app.hillfortStore.update(hillfort.copy())
+                app.hillforts.update(hillfort.copy())
                 setResult(201)
                 finish()
             } else {
                 if (hillfort.townland.isNotEmpty()) {
-                    app.hillfortStore.create(hillfort.copy())
+                    app.hillforts.create(hillfort.copy())
                     setResult(200)
                     finish()
                 } else {
