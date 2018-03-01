@@ -14,4 +14,7 @@ interface HillfortDao {
 
     @Update
     fun update(hillfort: HillfortModel)
+
+    @Delete
+    fun deleteHillfort(hillfort: HillfortModel)
 }
