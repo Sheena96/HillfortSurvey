@@ -1,30 +1,35 @@
 package org.wit.hillforts.activities
 
-import android.app.Activity
+
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.remove
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.wit.hillfort.helpers.readImage
 import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
+import org.wit.hillforts.models.Location
 import org.wit.hillfortsurvey.R
+
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
+    /*var calendar: Calendar = Calendar.getInstance()
+    var year:  Int = calendar.get(Calendar.YEAR)
+    var month: Int = calendar.get(Calendar.MONTH)
+    var day:   Int = calendar.get(Calendar.DAY_OF_MONTH)
+    //var dialog: DatePickerDialog*/
     lateinit var app: MainApp
     var edit = false
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +43,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             info("Select image")
         }
 
-
         if (intent.hasExtra("hillfort_edit")) {
             edit = true;
             btnAdd.setText(R.string.save_hillfort)
@@ -49,6 +53,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             if (hillfort.image != null) {
                 chooseImage.setText(R.string.change_hillfort_image)
             }
+
         }
 
         btnAdd.setOnClickListener() {
@@ -74,10 +79,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
-
         hillfortLocation.setOnClickListener {
-            startActivity (intentFor<MapsActivity>())
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
+
+        /*hillfortLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            startActivity (intentFor<MapsActivity>().putExtra("location", location))
+        }*/
     }
 
         override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -107,11 +116,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                     if (data != null) {
                         hillfort.image = data.getData().toString()
                         hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                        chooseImage.setText(R.string.change_hillfort_image)
+                    }
+                }
+                LOCATION_REQUEST -> {
+                    if (data != null) {
+                        location = data.extras.getParcelable<Location>("location")
                     }
                 }
             }
         }
-    }
+}
 
 
 

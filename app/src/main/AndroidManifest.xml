@@ -43,6 +43,9 @@
         <activity
             android:name="org.wit.hillforts.activities.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="org.wit.hillforts.activities.HillfortActivity"/>
     </application>
 
 </manifest>
