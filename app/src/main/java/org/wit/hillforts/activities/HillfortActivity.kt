@@ -10,6 +10,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillfort.helpers.readImage
 import org.wit.hillfort.helpers.readImageFromPath
@@ -75,6 +76,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
 
         hillfortLocation.setOnClickListener {
+            startActivity (intentFor<MapsActivity>())
         }
     }
 
@@ -86,6 +88,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         override fun onOptionsItemSelected(item: MenuItem?): Boolean {
             when (item?.itemId) {
                 R.id.item_cancel -> {
+                    setResult(RESULT_CANCELED)
+                    finish()
+                }
+                R.id.item_delete -> {
+                    app.hillforts.delete(hillfort)
                     setResult(RESULT_CANCELED)
                     finish()
                 }
