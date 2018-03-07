@@ -18,6 +18,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
     }
 
     override fun create(hillfort: HillfortModel) {
+        hillfort.id = getId()
         hillforts.add(hillfort)
         logAll()
     }
@@ -28,6 +29,8 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
             foundHillfort.townland = hillfort.townland
             foundHillfort.county = hillfort.county
             foundHillfort.image = hillfort.image
+            //foundHillfort.date = hillfort.date
+            //foundHillfort.coordinates = hillfort.coordinates
         }
     }
 

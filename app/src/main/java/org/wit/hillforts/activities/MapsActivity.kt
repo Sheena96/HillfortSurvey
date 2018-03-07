@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_maps.*
 import org.wit.hillforts.models.Location
 import org.wit.hillfortsurvey.R
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener  {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
 
     private lateinit var Map: GoogleMap
     var location = Location()
