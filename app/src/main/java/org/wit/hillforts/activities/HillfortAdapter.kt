@@ -11,6 +11,7 @@ import org.wit.hillfortsurvey.R
 
 interface HillfortListener {
     fun onHillfortClick(hillfort: HillfortModel)
+    fun onHillfortLongClick(hillfort: HillfortModel)
 }
 
 class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
@@ -33,7 +34,10 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
             itemView.HTownland.text = hillfort.townland
             itemView.HCounty.text = hillfort.county
             itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
+            //itemView.HDate.text = hillfort.date
+            //itemView.HLocation.text = hillfort.coordinates
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
+            itemView.setOnLongClickListener { listener.onHillfortLongClick(hillfort); true }
         }
     }
 }

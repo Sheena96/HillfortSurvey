@@ -22,9 +22,6 @@ import org.wit.hillforts.models.Location
 import org.wit.hillfortsurvey.R
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.synthetic.main.activity_hillfort.*
-
-
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -57,7 +54,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
             hillfortTownland.setText(hillfort.townland)
             county.setText(hillfort.county)
-            //text_view_date_1.setText(hillfort.date)
+            //hillfortDate.setText(hillfort.date)
             //latlong.setText(hillfort.coordinates)
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             if (hillfort.image != null) {
@@ -68,7 +65,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
             hillfort.townland = hillfortTownland.text.toString()
             hillfort.county = county.text.toString()
-            //hillfort.date = text_view_date_1.text.toString()
+            //hillfort.date = hillfortDate.text.toString()
             //hillfort.coordinates = latlong.text.toString()
 
             if (edit) {
@@ -95,7 +92,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         //References from the layout file
-        textview_date = this.text_view_date_1
+        textview_date = this.hillfortDate
         button_date = this.button_date_1
 
         textview_date!!.text = "--/--/----"

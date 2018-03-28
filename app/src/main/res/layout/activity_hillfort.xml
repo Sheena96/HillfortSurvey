@@ -97,7 +97,7 @@
                     app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
-                    android:id="@+id/text_view_date_1"
+                    android:id="@+id/hillfortDate"
                     android:layout_width="183dp"
                     android:layout_height="58dp"
                     android:layout_marginLeft="10dp"

@@ -6,7 +6,7 @@ import org.jetbrains.anko.coroutines.experimental.bg
 import org.wit.hillforts.models.HillfortStore
 import org.wit.hillforts.models.HillfortModel
 
-class HillfortStoreRoom(val context: Context) : HillfortStore {
+class HillfortStoreRoom(context: Context) : HillfortStore {
 
     var dao: HillfortDao
 

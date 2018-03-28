@@ -9,6 +9,8 @@ import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.ctx
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillforts.main.MainApp
@@ -29,13 +31,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        loadPlacemarks()
-    }
-
-    private fun loadPlacemarks() {
-        async(UI) {
-            showHillforts( app.hillforts.findAll())
-        }
+        loadHillforts()
     }
 
     fun showHillforts (hillforts: List<HillfortModel>) {
@@ -49,7 +45,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loadPlacemarks()
+        loadHillforts()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -63,7 +59,27 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     override fun onHillfortClick(hillfort: HillfortModel) {
         startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 201)
     }
+
+    override fun onHillfortLongClick(hillfort: HillfortModel) {
+        val title = "Delete townland"
+        val message = "Delete county"
+
+        alert(message, title) {
+            positiveButton(ctx.getString(android.R.string.ok)) {
+                app.hillforts.delete(hillfort)
+                loadHillforts()
+            }
+            negativeButton(ctx.getString(android.R.string.no)) { }
+        }.show()
+    }
+
+    private fun loadHillforts() {
+        async(UI) {
+            showHillforts( app.hillforts.findAll())
+        }
+    }
 }
+
 
 
 

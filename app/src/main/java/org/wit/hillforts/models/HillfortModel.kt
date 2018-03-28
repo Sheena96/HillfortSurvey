@@ -14,7 +14,7 @@ data class HillfortModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                          var townland: String = "",
                          var county: String = "",
                          var image: String = "" ): Parcelable
-                         //var date: String ="")
+                         //var date: String ="",
                          //var coordinates: String = ""
 
 @Parcelize
