@@ -13,9 +13,13 @@ import java.time.Year
 data class HillfortModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                          var townland: String = "",
                          var county: String = "",
-                         var image: String = "" ): Parcelable
+                         var image: String = "" ,
                          //var date: String ="",
                          //var coordinates: String = ""
+                         var lat : Double = 0.0,
+                         var lng: Double = 0.0,
+                         var zoom: Float = 0f) : Parcelable
+
 
 @Parcelize
 data class Location(var lat: Double = 0.0,
