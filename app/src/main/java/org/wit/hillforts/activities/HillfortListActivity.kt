@@ -9,10 +9,7 @@ import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.*
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
 import org.wit.hillfortsurvey.R
@@ -52,6 +49,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<HillfortActivity>(200)
+            R.id.item_map -> startActivity<HillfortMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

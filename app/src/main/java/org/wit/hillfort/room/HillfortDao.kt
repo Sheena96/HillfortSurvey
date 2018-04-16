@@ -12,6 +12,9 @@ interface HillfortDao {
     @Query("SELECT * FROM HillfortModel")
     fun findAll(): List<HillfortModel>
 
+    @Query("select * from HillfortModel where id = :id")
+    fun findById(id: Long): HillfortModel
+
     @Update
     fun update(hillfort: HillfortModel)
 
