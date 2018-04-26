@@ -8,8 +8,8 @@
     <string name="save_hillfort"> Save Hillfort </string>
     <string name="enter_hillfort_townland"> Please enter a Hillfort Townland </string>
     <string name="button_addImage"> Add Image </string>
-    <string name="select_hillfort_image">Select Hillfort image</string>
-    <string name="change_hillfort_image">Change Hillfort image</string>
+    <string name="select_hillfort_image">Select Image</string>
+    <string name="change_hillfort_image">Change Image</string>
     <string name="menu_deleteHillfort">Delete</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_maps">Map</string>
@@ -19,4 +19,5 @@
     <string name="text_view_date_1"></string>
     <string name="lat_long">Latitude/Longitude</string>
     <string name="title_activity_hillfort_maps">Map of All Hillforts</string>
+    <string name="menu_saveHillfort">Save</string>
 </resources>

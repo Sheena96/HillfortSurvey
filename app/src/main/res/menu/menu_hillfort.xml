@@ -7,9 +7,9 @@
         android:title="@string/menu_cancelHillfort"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/item_delete"
+        android:id="@+id/item_save"
         android:layout_marginRight="20dp"
-        android:title="@string/menu_deleteHillfort"
+        android:title="@string/menu_saveHillfort"
         app:showAsAction="always" />
 
 </menu>

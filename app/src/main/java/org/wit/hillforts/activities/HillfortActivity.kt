@@ -40,6 +40,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
         app = application as MainApp
+        mapView2.onCreate(savedInstanceState);
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
@@ -50,7 +51,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         if (intent.hasExtra("hillfort_edit")) {
             edit = true;
-            btnAdd.setText(R.string.save_hillfort)
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
             location.lat = hillfort.lat
             location.lng = hillfort.lng
@@ -62,27 +62,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 chooseImage.setText(R.string.change_hillfort_image)
             }
 
-        }
-        btnAdd.setOnClickListener() {
-            hillfort.townland = hillfortTownland.text.toString()
-            hillfort.county = county.text.toString()
-            hillfort.date = hillfortDate.text.toString()
-            hillfort.lat = location.lat
-            hillfort.lng = location.lng
-
-            if (edit) {
-                app.hillforts.update(hillfort.copy())
-                setResult(201)
-                finish()
-            } else {
-                if (hillfort.townland.isNotEmpty()) {
-                    app.hillforts.create(hillfort.copy())
-                    setResult(200)
-                    finish()
-                } else {
-                    toast(R.string.enter_hillfort_townland)
-                }
-            }
         }
 
         chooseImage.setOnClickListener {
@@ -136,17 +115,37 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_cancel -> {
-                setResult(RESULT_CANCELED)
-                finish()
+            R.id.item_save -> {
+                save()
             }
-            R.id.item_delete -> {
-                app.hillforts.delete(hillfort)
+            R.id.item_cancel -> {
                 setResult(RESULT_CANCELED)
                 finish()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun save() {
+        hillfort.townland = hillfortTownland.text.toString()
+        hillfort.county = county.text.toString()
+        hillfort.date = hillfortDate.text.toString()
+        hillfort.lat = location.lat
+        hillfort.lng = location.lng
+
+        if (edit) {
+            app.hillforts.update(hillfort.copy())
+            setResult(201)
+            finish()
+        } else {
+            if (hillfort.townland.isNotEmpty()) {
+                app.hillforts.create(hillfort.copy())
+                setResult(200)
+                finish()
+            } else {
+                toast(R.string.enter_hillfort_townland)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -166,6 +165,31 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
         }
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView2.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView2.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView2.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView2.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        mapView2.onSaveInstanceState(outState)
+    }
+
 }
 
 
