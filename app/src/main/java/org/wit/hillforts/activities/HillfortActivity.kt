@@ -32,7 +32,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     val LOCATION_REQUEST = 2
     var location = Location(52.245696, -7.139102, 15f)
 
-    var button_date: Button? = null
+    //var button_date_1: Button? = null
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
 
@@ -57,7 +57,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortTownland.setText(hillfort.townland)
             county.setText(hillfort.county)
             hillfortDate.setText(hillfort.date)
-            latlong.setText(hillfort.coordinates)
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             if (hillfort.image != null) {
                 chooseImage.setText(R.string.change_hillfort_image)
@@ -68,7 +67,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.townland = hillfortTownland.text.toString()
             hillfort.county = county.text.toString()
             hillfort.date = hillfortDate.text.toString()
-            hillfort.coordinates = latlong.text.toString()
             hillfort.lat = location.lat
             hillfort.lng = location.lng
 
@@ -97,7 +95,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         //References from the layout file
         textview_date = this.hillfortDate
-        button_date = this.button_date_1
+        //button_date_1 = this.button_date_1
 
         textview_date!!.text = "--/--/----"
 
@@ -113,7 +111,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
-        button_date!!.setOnClickListener(object : View.OnClickListener {
+        SetDate.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 DatePickerDialog(this@HillfortActivity, dateSetListener,
                         // set DatePickerDialog to point to today's date when it loads up
