@@ -11,6 +11,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.helpers.readImage
@@ -27,10 +31,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
     lateinit var app: MainApp
+    lateinit var map: GoogleMap
     var edit = false
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
     var location = Location(52.245696, -7.139102, 15f)
+    val defaultLocation = Location(52.245696, -7.139102, 15f)
 
     //var button_date_1: Button? = null
     var textview_date: TextView? = null
@@ -44,6 +50,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
+
+        mapView2.getMapAsync {
+            map = it
+            configureMap()
+        }
 
         chooseImage.setOnClickListener {
             info("Select image")
@@ -61,7 +72,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             if (hillfort.image != null) {
                 chooseImage.setText(R.string.change_hillfort_image)
             }
-
+        } else {
+            hillfort.lat = defaultLocation.lat
+            hillfort.lng = defaultLocation.lng
+            hillfort.zoom = defaultLocation.zoom
         }
 
         chooseImage.setOnClickListener {
@@ -69,7 +83,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         hillfortLocation.setOnClickListener {
-            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+            if (hillfort.zoom != 0f) {
+                defaultLocation.lat = hillfort.lat
+                defaultLocation.lng = hillfort.lng
+                defaultLocation.zoom = hillfort.zoom
+            }
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", defaultLocation), LOCATION_REQUEST)
         }
 
         //References from the layout file
@@ -148,6 +167,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 
+    fun configureMap() {
+        map.uiSettings.setZoomControlsEnabled(true)
+        val loc = LatLng(hillfort.lat, hillfort.lng)
+        val options = MarkerOptions().title(hillfort.townland).position(loc)
+        map.addMarker(options)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, hillfort.zoom))
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -160,7 +187,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
             LOCATION_REQUEST -> {
                 if (data != null) {
-                    location = data.extras.getParcelable<Location>("location")
+                    val location = data.extras.getParcelable<Location>("location")
+                    hillfort.lat = location.lat
+                    hillfort.lng = location.lng
+                    hillfort.zoom = location.zoom
+                    configureMap()
                 }
             }
         }
