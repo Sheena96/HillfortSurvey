@@ -52,10 +52,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             edit = true;
             btnAdd.setText(R.string.save_hillfort)
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+            location.lat = hillfort.lat
+            location.lng = hillfort.lng
             hillfortTownland.setText(hillfort.townland)
             county.setText(hillfort.county)
-            //hillfortDate.setText(hillfort.date)
-            //latlong.setText(hillfort.coordinates)
+            hillfortDate.setText(hillfort.date)
+            latlong.setText(hillfort.coordinates)
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             if (hillfort.image != null) {
                 chooseImage.setText(R.string.change_hillfort_image)
@@ -65,8 +67,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
             hillfort.townland = hillfortTownland.text.toString()
             hillfort.county = county.text.toString()
-            //hillfort.date = hillfortDate.text.toString()
-            //hillfort.coordinates = latlong.text.toString()
+            hillfort.date = hillfortDate.text.toString()
+            hillfort.coordinates = latlong.text.toString()
+            hillfort.lat = location.lat
+            hillfort.lng = location.lng
 
             if (edit) {
                 app.hillforts.update(hillfort.copy())

@@ -16,6 +16,4 @@ class HillfortSplashActivity : AppCompatActivity() {
            startActivity<HillfortListActivity>()
         }
     }
-
-
 }

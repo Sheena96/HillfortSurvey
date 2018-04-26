@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.wit.hillfortsurvey.R
@@ -14,7 +15,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.wit.hillforts.main.MainApp
 
-class HillfortMapsActivity : AppCompatActivity() {
+class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener  {
 
     lateinit var map: GoogleMap
     lateinit var app: MainApp
@@ -57,8 +58,14 @@ class HillfortMapsActivity : AppCompatActivity() {
         mapView.onSaveInstanceState(outState)
     }
 
+    override fun onMarkerClick(marker: Marker): Boolean {
+        currentTownland.text = marker.title
+        return false
+    }
+
     fun configureMap() {
         map.uiSettings.setZoomControlsEnabled(true)
+        map.setOnMarkerClickListener(this)
         async(UI) {
             app.hillforts.findAll().forEach {
                 val loc = LatLng(it.lat, it.lng)

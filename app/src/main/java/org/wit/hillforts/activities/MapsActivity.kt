@@ -34,6 +34,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMapReady(googleMap: GoogleMap) {
         Map = googleMap
         Map.setOnMarkerDragListener(this)
+        Map.uiSettings.setZoomControlsEnabled(true)
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
                 .title("Hillfort")
