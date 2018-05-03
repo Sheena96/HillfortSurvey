@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,7 +28,6 @@ import java.util.*
 import android.widget.RatingBar
 
 
-
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
@@ -38,7 +36,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     var edit = false
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
-    var location = Location(52.245696, -7.139102, 15f)
+    //var location = Location(52.245696, -7.139102, 15f)
     val defaultLocation = Location(52.245696, -7.139102, 15f)
 
     var textview_date: TextView? = null
@@ -67,8 +65,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         if (intent.hasExtra("hillfort_edit")) {
             edit = true;
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
-            location.lat = hillfort.lat
-            location.lng = hillfort.lng
+            //location.lat = hillfort.lat
+            //location.lng = hillfort.lng
             hillfortTownland.setText(hillfort.townland)
             county.setText(hillfort.county)
             hillfortDate.setText(hillfort.date)
@@ -153,8 +151,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         hillfort.townland = hillfortTownland.text.toString()
         hillfort.county = county.text.toString()
         hillfort.date = hillfortDate.text.toString()
-        hillfort.lat = location.lat
-        hillfort.lng = location.lng
+        //hillfort.lat = location.lat
+        //hillfort.lng = location.lng
         hillfort.rating = ratingBar.rating
 
         if (edit) {
@@ -193,6 +191,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             LOCATION_REQUEST -> {
                 if (data != null) {
                     val location = data.extras.getParcelable<Location>("location")
+                    //map.clear()
                     hillfort.lat = location.lat
                     hillfort.lng = location.lng
                     hillfort.zoom = location.zoom

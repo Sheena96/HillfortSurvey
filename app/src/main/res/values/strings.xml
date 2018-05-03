@@ -16,7 +16,6 @@
     <string name="welcomeText">Welcome to Hillfort Survey</string>
     <string name="enterButton"> Enter </string>
     <string name="button_date_1">Change Date</string>
-    <string name="text_view_date_1"></string>
     <string name="lat_long">Latitude/Longitude</string>
     <string name="title_activity_hillfort_maps">Map of All Hillforts</string>
     <string name="menu_saveHillfort">Save</string>
