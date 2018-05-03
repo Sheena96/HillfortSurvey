@@ -26,6 +26,9 @@ import org.wit.hillforts.models.Location
 import org.wit.hillfortsurvey.R
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.RatingBar
+
+
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -38,7 +41,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     var location = Location(52.245696, -7.139102, 15f)
     val defaultLocation = Location(52.245696, -7.139102, 15f)
 
-    //var button_date_1: Button? = null
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
 
@@ -60,6 +62,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             info("Select image")
         }
 
+        val mRatingBar = findViewById<View>(R.id.ratingBar) as RatingBar
+
         if (intent.hasExtra("hillfort_edit")) {
             edit = true;
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
@@ -68,6 +72,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortTownland.setText(hillfort.townland)
             county.setText(hillfort.county)
             hillfortDate.setText(hillfort.date)
+            mRatingBar.onRatingBarChangeListener = RatingBar.OnRatingBarChangeListener {
+                ratingBar, v, b -> }
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             if (hillfort.image != null) {
                 chooseImage.setText(R.string.change_hillfort_image)
@@ -93,8 +99,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         //References from the layout file
         textview_date = this.hillfortDate
-        //button_date_1 = this.button_date_1
-
         textview_date!!.text = "--/--/----"
 
         // create an OnDateSetListener
@@ -151,6 +155,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         hillfort.date = hillfortDate.text.toString()
         hillfort.lat = location.lat
         hillfort.lng = location.lng
+        hillfort.rating = ratingBar.rating
 
         if (edit) {
             app.hillforts.update(hillfort.copy())

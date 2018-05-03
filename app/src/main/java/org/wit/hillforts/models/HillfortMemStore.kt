@@ -30,7 +30,6 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
             foundHillfort.county = hillfort.county
             foundHillfort.image = hillfort.image
             //foundHillfort.date = hillfort.date
-            //foundHillfort.coordinates = hillfort.coordinates
         }
     }
 

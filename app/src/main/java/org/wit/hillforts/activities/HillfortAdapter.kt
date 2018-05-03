@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_hillfort.view.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillforts.models.HillfortModel
@@ -35,7 +36,7 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
             itemView.HCounty.text = hillfort.county
             itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
             itemView.HDate.text = hillfort.date
-            itemView.HLocation.text = hillfort.coordinates
+            itemView.rBar.rating = hillfort.rating
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
             itemView.setOnLongClickListener { listener.onHillfortLongClick(hillfort); true }
         }
