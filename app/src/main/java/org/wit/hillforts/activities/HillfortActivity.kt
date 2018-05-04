@@ -1,6 +1,7 @@
 package org.wit.hillforts.activities
 
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -16,9 +17,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
-import org.wit.hillfort.helpers.readImage
-import org.wit.hillfort.helpers.readImageFromPath
-import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
 import org.wit.hillforts.models.Location
@@ -26,6 +24,9 @@ import org.wit.hillfortsurvey.R
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.RatingBar
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import org.wit.hillfort.helpers.*
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -41,6 +42,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
+
+    private lateinit var locationService: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +64,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         val mRatingBar = findViewById<View>(R.id.ratingBar) as RatingBar
+
+        hillfortHere.isEnabled = false
+
+        hillfortHere.setOnClickListener {
+            setCurrentLocation()
+        }
+
+        locationService = LocationServices.getFusedLocationProviderClient(this)
 
         if (intent.hasExtra("hillfort_edit")) {
             edit = true;
@@ -225,6 +236,30 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         mapView2.onSaveInstanceState(outState)
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (checkLocationPermissions(this)) {
+            hillfortHere.isEnabled = true
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            hillfortHere.isEnabled = true
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun setCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            defaultLocation.lat = it.latitude
+            defaultLocation.lng = it.longitude
+            hillfort.lat = it.latitude
+            hillfort.lng = it.longitude
+            configureMap()
+        }
+    }
 }
 
 

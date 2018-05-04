@@ -19,4 +19,5 @@
     <string name="lat_long">Latitude/Longitude</string>
     <string name="title_activity_hillfort_maps">Map of All Hillforts</string>
     <string name="menu_saveHillfort">Save</string>
+    <string name="hillfortHere">HERE</string>
 </resources>
