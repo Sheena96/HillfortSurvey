@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -15,6 +16,9 @@ import org.wit.hillforts.models.HillfortModel
 import org.wit.hillfortsurvey.R
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener {
+    override fun onMarkerClick(marker: Marker): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     lateinit var app: MainApp
 

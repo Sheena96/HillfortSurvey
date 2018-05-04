@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_hillfort_maps.*
 import kotlinx.android.synthetic.main.content_hillfort_maps.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.image
+import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillforts.main.MainApp
 
 class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener  {
@@ -59,7 +61,13 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTownland.text = marker.title
+        async(UI) {
+            val tag = marker.tag as Long
+            val hillfort = app.hillforts.findById(tag)
+            currentTownland.text = hillfort!!.townland
+            CurrentCounty.text = hillfort!!.county
+            imageView.setImageBitmap(readImageFromPath(this@HillfortMapsActivity, hillfort.image))
+        }
         return false
     }
 
