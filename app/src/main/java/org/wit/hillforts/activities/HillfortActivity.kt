@@ -79,11 +79,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         if (intent.hasExtra("hillfort_edit")) {
             edit = true;
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
-            //location.lat = hillfort.lat
-            //location.lng = hillfort.lng
             hillfortTownland.setText(hillfort.townland)
             county.setText(hillfort.county)
             hillfortDate.setText(hillfort.date)
+            lat.setText(hillfort.lat.toString())
+            lng.setText(hillfort.lng.toString())
             mRatingBar.onRatingBarChangeListener = RatingBar.OnRatingBarChangeListener {
                 ratingBar, v, b -> }
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
@@ -232,7 +232,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     override fun onResume() {
         super.onResume()
         mapView2.onResume()
-        startLocationUpdates()
+        if (!edit) {
+            startLocationUpdates()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -272,6 +274,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 info("Location Update ${l.latitude} ${l.longitude}")
                 lat.setText(l.latitude.toString())
                 lng.setText(l.longitude.toString())
+                hillfort.lat = l.latitude
+                hillfort.lng = l.longitude
+                configureMap()
             }
         }
     }
