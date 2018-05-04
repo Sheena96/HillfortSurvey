@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.google.android.gms.maps.model.Marker
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -27,7 +28,9 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
 
-        toolbarMain.title = title
+        val user = FirebaseAuth.getInstance().currentUser
+        var appTitle = "${title.toString()}: ${user!!.email}"
+        toolbarMain.title = appTitle
         setSupportActionBar(toolbarMain)
 
         val layoutManager = LinearLayoutManager(this)
@@ -54,6 +57,10 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<HillfortActivity>(200)
             R.id.item_map -> startActivity<HillfortMapsActivity>()
+            R.id.item_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                startActivity<LoginActivity>()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
