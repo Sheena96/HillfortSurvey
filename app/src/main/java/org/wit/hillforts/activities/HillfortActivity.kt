@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.RatingBar
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import org.wit.hillfort.helpers.*
 
@@ -39,6 +41,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     val LOCATION_REQUEST = 2
     //var location = Location(52.245696, -7.139102, 15f)
     val defaultLocation = Location(52.245696, -7.139102, 15f)
+    val locationRequest = createDefaultLocationRequest()
 
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
@@ -229,6 +232,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     override fun onResume() {
         super.onResume()
         mapView2.onResume()
+        startLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -259,6 +263,22 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.lng = it.longitude
             configureMap()
         }
+    }
+
+    var locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult?) {
+            if (locationResult != null && locationResult.locations != null) {
+                val l = locationResult.locations.last()
+                info("Location Update ${l.latitude} ${l.longitude}")
+                lat.setText(l.latitude.toString())
+                lng.setText(l.longitude.toString())
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdates() {
+        locationService.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 }
 
