@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:elevation="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+
+        <ImageView
+            android:id="@+id/imageIcon"
+            android:layout_width="99dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="253dp"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:id="@+id/HTownland"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/HCounty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/HTownland" />
+
+        <TextView
+            android:id="@+id/HDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/HCounty" />
+
+        <TextView
+            android:id="@+id/HLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hillfortDate" />
+
+        <RatingBar
+            android:id="@+id/rBar"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/HDate"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

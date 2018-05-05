@@ -10,83 +10,76 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="334dp"
-        android:layout_height="289dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="533dp"
+        android:layout_height="503dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="224dp"
-        android:layout_height="293dp"
-        android:layout_marginBottom="92dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="532dp"
+        android:layout_height="251dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.979">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="264dp">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="183dp"
-                android:layout_height="188dp"
+                android:layout_width="185dp"
+                android:layout_height="164dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.076"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.91"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/currentTownland"
-                android:layout_width="182dp"
-                android:layout_height="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="217dp"
+                android:layout_height="51dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintHorizontal_bias="0.29"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/CurrentCounty"
-                android:layout_width="179dp"
-                android:layout_height="26dp"
+                android:layout_width="219dp"
+                android:layout_height="51dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintHorizontal_bias="0.296"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.168" />
+                app:layout_constraintTop_toBottomOf="@+id/currentTownland"
+                app:layout_constraintVertical_bias="0.246" />
         </android.support.constraint.ConstraintLayout>
-
     </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

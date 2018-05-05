@@ -36,6 +36,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         loadHillforts()
+
     }
 
     fun showHillforts (hillforts: List<HillfortModel>) {
